@@ -2,7 +2,6 @@ import os
 
 FILE_NAME = "film.txt"
 
-
 def carica_film():    
     if not os.path.exists(FILE_NAME):
         print('Errore nel collegamento')
@@ -10,13 +9,11 @@ def carica_film():
         film = [riga.strip() for riga in f if riga.strip()]
     return film
 
-
 def salva_film(film):
    
     with open(FILE_NAME, "w", encoding="utf-8") as f:
         for titolo in film:
-            f.write(titolo + " ")
-
+            f.write(titolo + "\n")
 
 def visualizza_film(film):
     
@@ -28,7 +25,6 @@ def visualizza_film(film):
             print(f"  {i}. {titolo}")
     print()
 
-
 def inserisci_film(film):
     
     titolo = input("Titolo del film da aggiungere: ").strip()
@@ -39,9 +35,7 @@ def inserisci_film(film):
         print("Film già presente nella collezione.")
         return
     film.append(titolo)
-    salva_film(film)
     print(f"'{titolo}' aggiunto con successo.")
-
 
 def modifica_film(film):
     
@@ -63,9 +57,7 @@ def modifica_film(film):
         print("Titolo non valido.")
         return
     film[scelta - 1] = nuovo
-    salva_film(film)
     print(f" '{vecchio}' rinominato in '{nuovo}'.")
-
 
 def cancella_film(film):
     
@@ -82,9 +74,12 @@ def cancella_film(film):
         return
 
     titolo = film.pop(scelta - 1)
-    salva_film(film)
     print(f" '{titolo}' rimosso dalla collezione.")
 
+def salva_manuale(film):
+    
+    salva_film(film)
+    print("Collezione salvata con successo!")
 
 def menu():
     print("VIDEOTECA DIGITALE")
@@ -92,6 +87,7 @@ def menu():
     print("  2. Aggiungi film")
     print("  3. Modifica film")
     print("  4. Cancella film")
+    print("  5. Salva collezione")
     print("  0. Esci")
     return input("Scelta: ").strip()
 
@@ -108,6 +104,8 @@ while True:
         modifica_film(film)
     elif scelta == "4":
         cancella_film(film)
+    elif scelta == "5":
+        salva_manuale(film)
     elif scelta == "0":
         print("Arrivederci!")
         break
