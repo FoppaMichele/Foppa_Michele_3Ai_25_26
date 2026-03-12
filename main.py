@@ -76,10 +76,9 @@ def cancella_film(film):
     titolo = film.pop(scelta - 1)
     print(f" '{titolo}' rimosso dalla collezione.")
 
-def salva_manuale(film):
+
     
-    salva_film(film)
-    print("Collezione salvata con successo!")
+  
 
 def menu():
     print("VIDEOTECA DIGITALE")
@@ -93,8 +92,8 @@ def menu():
 
 film = carica_film()
 print(f" Caricati {len(film)} film da '{FILE_NAME}'.")
-
-while True:
+run=True
+while run==True:
     scelta = menu()
     if scelta == "1":
         visualizza_film(film)
@@ -104,10 +103,10 @@ while True:
         modifica_film(film)
     elif scelta == "4":
         cancella_film(film)
-    elif scelta == "5":
-        salva_manuale(film)
     elif scelta == "0":
         print("Arrivederci!")
-        break
+        salva_film(film)
+        print("Collezione salvata con successo!")
+        run=False
     else:
         print("Scelta non valida.")
